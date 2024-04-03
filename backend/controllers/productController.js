@@ -34,8 +34,13 @@ export  const addProduct = async (req, res) => {
 export const getAllProducts = async (req, res) => {
 try {
     const product = await Product.find()
-    res.status(200).json(product)
+    res.status(200).json({
+        products:product,
+        countOfProducts: product.length
+    })
 
+
+      
 } catch (err) {
     res.json({
         message: err.message
