@@ -17,7 +17,9 @@ export const postMessage = async (req, res) => {
             throw new Error('Something went wrong when creating the product')
         }
 
-        res.status(200).json(pMessage)
+        res.status(200).json({
+            message: 'Message sent successfully'
+        })
 
     } catch (err) {
         res.json({

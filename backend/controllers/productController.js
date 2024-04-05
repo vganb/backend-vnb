@@ -13,7 +13,12 @@ export  const addProduct = async (req, res) => {
             throw new Error('You need to enter all required fields:')
         }
 
-        const product = await Product.create({name, price, description, category, images})
+        const product = await Product.create({
+            name, 
+            price, 
+            description, 
+            category, 
+            images})
         
         if(!product){
             res.status(500)
