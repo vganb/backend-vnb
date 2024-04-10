@@ -3,8 +3,8 @@ const app = express()
 import productRoutes from './routes/productRoutes.js'
 import messageRoutes from './routes/messageRoutes.js'
 import userRoutes from './routes/userRoutes.js'
-import { errorHandler, notFound } from './middleware/errorMiddleware.js'
 import orderRoutes from './routes/orderRoutes.js'
+import { errorHandler, notFound } from './middleware/errorMiddleware.js'
 
 
 app.use(express.urlencoded({extended:false}))

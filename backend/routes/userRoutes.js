@@ -4,9 +4,10 @@ const router = express.Router()
 import {
     registerUser,
     loginUser,
-    // getUserProfile,
-    // updateUserProfile
+    getUserProfile,
+    updateUserProfile
 } from '../controllers/userController.js'
+import { verifyToken } from '../middleware/authMiddleware.js'
 
 // Routes
 
@@ -14,8 +15,8 @@ router.post('/register', registerUser)
 router.post('/login', loginUser)
 
 // TODO: protect
-// router.get('/profile', getUserProfile)
-// router.put('/profile', updateUserProfile)
+router.get('/profile', verifyToken, getUserProfile)
+router.put('/profile', verifyToken, updateUserProfile)
 
 
 

@@ -8,7 +8,8 @@ import {
 // Routes
 
 router.post('/', createOrder)
-router.get('/:id', getOrder)
+
+router.get('/:orderId', getOrder)
 
 
 

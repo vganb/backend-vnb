@@ -49,6 +49,7 @@ const token = generateToken(user)
 
 
 res.status(201).json({
+    _id: user._id,
     firstName: user.firstName,
     lastName:user.lastName,
     email:user.email,
@@ -86,6 +87,7 @@ export const loginUser = asyncHandler( async (req, res) => {
     }
 
     res.status(200).json({
+        _id: user._id,
         firstName: user.firstName,
         lastName:user.lastName,
         email:user.email,
@@ -102,18 +104,63 @@ export const loginUser = asyncHandler( async (req, res) => {
 
 
 
-
-
-
-
-
 export const getUserProfile = asyncHandler( async (req, res) => {
-    res.json({message: 'get user profile'})
+//   const user = await User.findById(req.userId).select('-passwordHash')
+  const user = await User.findById(req.userId)
+
+  if(!user) {
+    res.status(404)
+    throw new Error('User not found')
+  }
+  res.status(200).json({
+    _id: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    displayName: user.displayName
+   })
 })
 
 
+
+
+
  export const updateUserProfile = asyncHandler( async (req, res) => {
-    res.json({message: 'update user profile'})
+    const user = await User.findById(req.userId)
+    if(!user) {
+        res.status(404)
+        throw new Error('User not found')
+      }
+
+    
+    user.firstName = req.body.firstName || user.firstName
+    user.lastName = req.body.lastName || user.lastName
+
+    if(req.body.email){
+        const userExists = await User.exists({email: req.body.email})
+    if(userExists) {
+        res.status(400)
+        throw new Error('The email adress is already taken')
+    }
+    user.email = req.body.email
+    }
+
+
+    if(req.body.password) {
+        user.password = req.body.password
+    }
+
+    const updatedUser = await user.save()
+
+    res.status(200).json({
+        _id: updatedUser._id,
+        firstName: updatedUser.firstName,
+        lastName: updatedUser.lastName,
+        email: updatedUser.email,
+        displayName: updatedUser.displayName
+    })
+
+
 })
 
 

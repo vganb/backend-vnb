@@ -5,7 +5,7 @@ import mongoose, { Schema, model} from "mongoose";
 const orderSchema = new Schema({
 user:{
     type:mongoose.Schema.Types.ObjectId,
-    ref:'User',
+    ref:'user',
     required: true
 },
 products: [
@@ -16,7 +16,7 @@ products: [
             },
     product: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
+        ref: 'product',
         required:true
     }
     

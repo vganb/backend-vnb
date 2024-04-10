@@ -57,12 +57,16 @@ try {
 export const getProductById = async (req, res) => {
 
     if(!mongoose.isValidObjectId(req.params.id)) {
-        return res.status(400).json({message:'ObjectId not valid'})
+        res.status(400).json({message:'ObjectId not valid'})
+        // throw new Error('You need to enter all the fields')
     }
+
     Product.findById(req.params.id)
     .then(data => {
         if(!data) {
-            return res.status(404).json({message: 'Not found'})
+            return res.status(404).json({message: 'Not found, insert the correct product ID'})
+            // res.status(404)
+            // throw new Error('You need to input correct product ID')
         }
         res.status(200).json(data)
     })
