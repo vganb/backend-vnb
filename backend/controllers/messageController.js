@@ -1,18 +1,20 @@
 import Message from "../models/messageModel.js"
+import asyncHandler from 'express-async-handler'
 
-export const postMessage = async (req, res) => {
+
+export const postMessage = asyncHandler (async (req, res) => {
     
-    try {
+
         const {name, email, message} = req.body
 
         if(!name || !email || !message) {
             res.status(400)
-            throw new Error('You need to enter all required fields')
+            throw new Error('You need to enter all required fields: name, email and message')
         }
-        const pMessage = await Message.create({name, email, message})
+        const newMessage = await Message.create({name, email, message})
 
     
-        if(!pMessage){
+        if(!newMessage){
             res.status(500)
             throw new Error('Something went wrong when creating the product')
         }
@@ -21,12 +23,8 @@ export const postMessage = async (req, res) => {
             message: 'Message sent successfully'
         })
 
-    } catch (err) {
-        res.json({
-            message:err.message
-        })
-    }
-}
+    
+})
 
 
 

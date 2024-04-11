@@ -1,4 +1,4 @@
-import mongoose, { Schema, model} from "mongoose";
+import { Schema, model} from "mongoose";
 
 function arrayLimit(val) {
     return val.length <= 4;

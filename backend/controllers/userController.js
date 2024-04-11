@@ -1,4 +1,3 @@
-import mongoose from 'mongoose'
 import User from "../models/userModel.js";
 import asyncHandler from 'express-async-handler'
 import bcrypt from 'bcryptjs'
@@ -49,19 +48,15 @@ const token = generateToken(user)
 
 
 res.status(201).json({
-    _id: user._id,
-    firstName: user.firstName,
-    lastName:user.lastName,
-    email:user.email,
-    displayName:user.displayName,
-    token
+    message: 'User created sucessfully',
+    token:generateToken(token)
 })
 })
 
 
 
 
-export const loginUser = asyncHandler( async (req, res) => {
+export const loginUser = asyncHandler(async (req, res) => {
 
     const {email, password} = req.body
 
@@ -87,11 +82,7 @@ export const loginUser = asyncHandler( async (req, res) => {
     }
 
     res.status(200).json({
-        _id: user._id,
-        firstName: user.firstName,
-        lastName:user.lastName,
-        email:user.email,
-        displayName:user.displayName,
+        "message": "Login successful",
         token:generateToken(user)
     })
 
