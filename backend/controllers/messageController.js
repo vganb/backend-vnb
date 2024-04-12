@@ -2,6 +2,7 @@ import Message from "../models/messageModel.js"
 import asyncHandler from 'express-async-handler'
 
 
+// CREATE message
 export const postMessage = asyncHandler (async (req, res) => {
     
 

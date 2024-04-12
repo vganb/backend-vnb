@@ -24,11 +24,3 @@ try {
 
 
 export {verifyToken}
-
-
-// fetch('blabla', {
-//     method:'POST',
-//     headers:{
-//         'Authorization': 'Bearer kajdfkljakldjfakljf'
-//     }
-// })

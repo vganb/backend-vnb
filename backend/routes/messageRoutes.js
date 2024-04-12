@@ -6,8 +6,8 @@ import {
 
 
 
-// CRUD - CREATE READ UPDATE DELETE
-// POST message
+
+// create message
 router.post('/', postMessage)
 
 

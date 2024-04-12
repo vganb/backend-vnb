@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs'
 import generateToken from '../utils/generateToken.js';
 
 
+// REGISTER user
 
 export const registerUser = asyncHandler( async (req, res) => {
 const {firstName, lastName, email, password} = req.body
@@ -32,17 +33,10 @@ const user = await User.create({
 })
 
 
-// ALT 2
-// const user = await User.create({
-//     firstName, 
-//     lastName, 
-//     email,
-//     passwordHash:password
-// })
 
 
 
-// TODO: Generate token
+//  Generate token
 const token = generateToken(user)
 
 
@@ -56,6 +50,7 @@ res.status(201).json({
 
 
 
+// LOGIN user
 export const loginUser = asyncHandler(async (req, res) => {
 
     const {email, password} = req.body
@@ -74,7 +69,6 @@ export const loginUser = asyncHandler(async (req, res) => {
     }
 
     const result = await bcrypt.compare(password, user.passwordHash)
-    // const result = user.matchPassword(password)
 
     if(!result) {
         res.status(401)
@@ -93,10 +87,9 @@ export const loginUser = asyncHandler(async (req, res) => {
 
 
 
-
+// GET user profile
 
 export const getUserProfile = asyncHandler( async (req, res) => {
-//   const user = await User.findById(req.userId).select('-passwordHash')
   const user = await User.findById(req.userId)
 
   if(!user) {
@@ -114,6 +107,7 @@ export const getUserProfile = asyncHandler( async (req, res) => {
 
 
 
+// UPDATE user profile
 
 
  export const updateUserProfile = asyncHandler( async (req, res) => {

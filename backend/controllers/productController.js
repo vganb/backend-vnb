@@ -96,6 +96,7 @@ export const updateProduct = asyncHandler (async (req, res) => {
     
 })
 
+// DELETE product 
 
 export const deleteProduct = asyncHandler (async (req, res) => {
 

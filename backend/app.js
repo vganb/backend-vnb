@@ -17,6 +17,7 @@ app.use('/api/message', messageRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 
+// middleware
 app.use(notFound)
 app.use(errorHandler)
 

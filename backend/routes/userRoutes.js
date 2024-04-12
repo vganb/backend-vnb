@@ -14,7 +14,7 @@ import { verifyToken } from '../middleware/authMiddleware.js'
 router.post('/register', registerUser)
 router.post('/login', loginUser)
 
-// TODO: protect
+
 router.get('/profile', verifyToken, getUserProfile)
 router.put('/profile', verifyToken, updateUserProfile)
 

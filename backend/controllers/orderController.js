@@ -3,7 +3,7 @@ import asyncHandler from 'express-async-handler'
 
 
 
-
+// CREATE order
 
 export const createOrder = asyncHandler (async (req,res) => {
     const {productId, quantity} = req.body
@@ -29,6 +29,7 @@ export const createOrder = asyncHandler (async (req,res) => {
 })
 
 
+// GET order by id
 
 export const getOrder = asyncHandler (async (req, res) => {
 try {
@@ -52,6 +53,8 @@ try {
     }
 })
 
+
+// GET all orders from user
 export const getAllOrders = asyncHandler (async (req, res) => {
     try {
     
