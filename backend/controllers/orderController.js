@@ -1,19 +1,21 @@
 import Order from '../models/orderModel.js'
+import asyncHandler from 'express-async-handler'
 
 
 
 
-export const createOrder = async (req,res) => {
-    const {user,productId, quantity} = req.body
+
+export const createOrder = asyncHandler (async (req,res) => {
+    const {productId, quantity} = req.body
 
 
-    if(!user || !productId || !quantity){
+    if(!productId || !quantity){
         res.status(400)
         throw new Error('You need to enter all fields')
     }
 
     const newOrder = new Order({
-        user,
+        user:req.userId,
         products: [{ quantity, product: productId}]
     })
     
@@ -24,15 +26,14 @@ export const createOrder = async (req,res) => {
         order:newOrder
     })
 
-}
+})
 
 
 
-export const getOrder = async (req, res) => {
+export const getOrder = asyncHandler (async (req, res) => {
 try {
-    console.log('order:ID', req.params.orderId)
 
-    const order = await Order.findOne({_id:req.params.orderId}).populate('products.product')
+    const order = await Order.findOne({_id:req.params.orderId, user:req.userId}).populate('products.product')
 
 
     if(!order) {
@@ -49,15 +50,25 @@ try {
         message: err.message
         })
     }
-}
+})
 
-// if(!mongoose.isValidObjectId(req.params.id)) {
-//     return res.status(400).json({message:'ObjectId not valid'})
-// }
-// Product.findById(req.params.id)
-// .then(data => {
-//     if(!data) {
-//         return res.status(404).json({message: 'Not found'})
-//     }
-//     res.status(200).json(data)
-// })
+export const getAllOrders = asyncHandler (async (req, res) => {
+    try {
+    
+        const order = await Order.find({user:req.userId}).populate('products.product');    
+    
+         if(!order || order.length === 0) {
+            return res.status(404).json({
+                message: 'order not found'
+            });
+        }
+    
+    
+        res.status(200).json(order)
+    
+    } catch (err) {
+        res.status(500).json({
+            message: err.message
+            })
+        }
+    })
