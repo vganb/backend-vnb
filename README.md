@@ -1,4 +1,4 @@
-# The Plug databse
+# The Plug database
 
 ENG
 ##Description
@@ -42,5 +42,3 @@ Detta projekt är en webbapplikation för att hantera beställningar och produkt
 
 ## Disclaimer
 Alla produktbilder som används i denna applikation har tagits från komplett.se och är endast för demoändamål. De får inte användas i produktionsmiljö utan korrekt tillstånd från upphovsrättsinnehavarna.
-
-
