@@ -1,4 +1,5 @@
 The Plug Database
+
 ##Description
 This project is a web application for managing orders and products in an e-commerce platform. Users can create accounts, add products to their carts, and place orders. Administrators have access to manage products, orders, and user accounts.
 
